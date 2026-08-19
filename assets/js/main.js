@@ -12,6 +12,22 @@
 
   document.querySelectorAll('.nav-dropdown').forEach((dropdown) => dropdown.removeAttribute('open'));
 
+  const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+  const therapyPages = new Set(['terapia.html', 'terapia-indywidualna.html', 'terapia-par.html']);
+  menu?.querySelectorAll(':scope > a[href]').forEach((link) => {
+    const linkFile = link.getAttribute('href')?.split('#')[0];
+    const isCurrent = linkFile === currentFile || (currentFile === '' && linkFile === 'index.html');
+    if (isCurrent) {
+      link.classList.add('is-current');
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+  const therapyNav = menu?.querySelector('.nav-dropdown');
+  if (therapyNav && therapyPages.has(currentFile)) {
+    therapyNav.classList.add('is-current');
+    therapyNav.querySelector('summary')?.setAttribute('aria-current', 'page');
+  }
+
   const closeMenu = () => {
     menuButton?.setAttribute('aria-expanded', 'false');
     menu?.classList.remove('is-open');
