@@ -29,10 +29,10 @@ Sekcje należy przenieść jako niezależne bloki: Hero, Idea WSR, Obszary ofert
 ## Przed wersją produkcyjną
 
 - podmienić wersję ze znakiem wodnym na finalny, nieoznaczony kadr z sesji,
-- uzupełnić pełne dane administratora w Polityce prywatności,
+- potwierdzić finalne dane identyfikujące administratora; obecnie wskazany jest Krzysztof Goljanek bez adresu,
 - potwierdzić, czy finalnie będzie używana analityka, i wpisać konkretnych dostawców do Polityki cookies,
 - zatwierdzić slogan i tekst cytatu Krzysztofa,
 - potwierdzić docelowy adres e-mail oraz dane kontaktowe,
-- przygotować podstrony usług i wydarzeń,
-- dodać politykę prywatności oraz mechanizm formularza dopiero po wyborze backendu,
+- rozbudować podstrony poszczególnych warsztatów po ustaleniu finalnej oferty,
+- dodać mechanizm formularza i zaktualizować politykę prywatności dopiero po wyborze backendu,
 - ustalić domenę, analitykę i finalne metadane społecznościowe.

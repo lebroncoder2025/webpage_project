@@ -1,10 +1,14 @@
 (() => {
+  document.documentElement.classList.add('js-enabled');
   const header = document.querySelector('[data-header]');
   const menuButton = document.querySelector('.menu-toggle');
   const menu = document.querySelector('.main-nav');
   const transition = document.querySelector('[data-booking-transition]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const consentKey = 'wsrConsentV1';
+  const consentSessionKey = `${consentKey}Session`;
+  let volatileConsent = null;
+  let consentReturnFocus = null;
 
   const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 20);
   updateHeader();
@@ -25,14 +29,23 @@
   const therapyNav = menu?.querySelector('.nav-dropdown');
   if (therapyNav && therapyPages.has(currentFile)) {
     therapyNav.classList.add('is-current');
-    therapyNav.querySelector('summary')?.setAttribute('aria-current', 'page');
+    therapyNav.querySelectorAll('a[href]').forEach((link) => {
+      if (link.getAttribute('href') === currentFile) {
+        link.classList.add('is-current');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
   }
 
-  const closeMenu = () => {
-    menuButton?.setAttribute('aria-expanded', 'false');
-    menu?.classList.remove('is-open');
-    document.body.classList.remove('menu-open');
+  const setMenuState = (open) => {
+    menuButton?.setAttribute('aria-expanded', String(open));
+    menu?.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    const menuLabel = menuButton?.querySelector('.sr-only');
+    if (menuLabel) menuLabel.textContent = open ? 'Zamknij menu' : 'Otwórz menu';
+    if (!open) menu?.querySelectorAll('.nav-dropdown[open]').forEach((dropdown) => dropdown.removeAttribute('open'));
   };
+  const closeMenu = () => setMenuState(false);
 
   const resetBookingTransition = () => {
     transition?.classList.remove('is-active');
@@ -43,14 +56,18 @@
 
   menuButton?.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!open));
-    menu?.classList.toggle('is-open', !open);
-    document.body.classList.toggle('menu-open', !open);
+    setMenuState(!open);
+  });
+  const desktopMenu = window.matchMedia('(min-width: 1061px)');
+  desktopMenu.addEventListener?.('change', (event) => {
+    if (event.matches) closeMenu();
   });
   menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+      const menuWasOpen = menuButton?.getAttribute('aria-expanded') === 'true';
       closeMenu();
+      if (menuWasOpen) menuButton?.focus();
       closeConsent();
     }
   });
@@ -64,6 +81,7 @@
       if (bookingTab) bookingTab.opener = null;
       if (reducedMotion || !transition) {
         if (bookingTab) bookingTab.location.replace(destination);
+        else window.location.assign(destination);
         return;
       }
       closeMenu();
@@ -73,14 +91,19 @@
       if (transitionCopy) transitionCopy.textContent = 'Otwieramy kalendarz w nowej karcie';
       transition.classList.add('is-active');
       window.setTimeout(() => {
-        if (bookingTab) bookingTab.location.replace(destination);
         resetBookingTransition();
+        if (bookingTab) bookingTab.location.replace(destination);
+        else window.location.assign(destination);
       }, 650);
     });
   });
 
-  document.querySelectorAll('.button span, .inline-link span, .contact-text-link span').forEach((arrow) => {
-    if (arrow.textContent.trim() === '\u2197') arrow.textContent = '\u2192';
+  if (transition) {
+    transition.setAttribute('role', 'status');
+    transition.setAttribute('aria-live', 'polite');
+  }
+  document.querySelectorAll('.cookie-row').forEach((row) => {
+    row.querySelectorAll(':scope > *').forEach((cell) => cell.setAttribute('role', row.classList.contains('cookie-head') ? 'columnheader' : 'cell'));
   });
 
   const revealItems = document.querySelectorAll('.reveal');
@@ -110,13 +133,12 @@
       const yearText = year?.textContent || new Date().getFullYear();
       copyright.textContent = `\u00a9 ${yearText} Warsztat Świadomych Relacji \u2014 Wszystkie prawa zastrze\u017cone`;
     }
-    footer.querySelectorAll('p').forEach((item) => {
-      if (item !== copyright && /Projekt w fazie|Dokument informacyjny/.test(item.textContent)) item.remove();
-    });
-    if (footer.querySelector('a[href="polityka-prywatnosci.html"]')) return;
+    if (footer.querySelector('[data-open-consent]')) return;
     const links = document.createElement('span');
     links.className = 'footer-legal-links';
-    links.innerHTML = '<a href="polityka-prywatnosci.html">Prywatność</a><a href="polityka-cookies.html">Cookies</a>';
+    const footerTop = footer.closest('.site-footer')?.querySelector('.footer-top');
+    const legalLinks = footerTop?.querySelector('a[href="polityka-prywatnosci.html"]') ? '' : '<a href="polityka-prywatnosci.html">Prywatność</a><a href="polityka-cookies.html">Cookies</a>';
+    links.innerHTML = `${legalLinks}<button class="footer-consent-button" type="button" data-open-consent>Ustawienia cookies</button>`;
     footer.appendChild(links);
   });
 
@@ -124,16 +146,25 @@
     try {
       const saved = JSON.parse(localStorage.getItem(consentKey));
       if (saved && typeof saved === 'object') return { necessary: true, analytics: Boolean(saved.analytics), marketing: Boolean(saved.marketing), updatedAt: saved.updatedAt || null };
-    } catch (_) { /* localStorage może być zablokowany — pokażemy baner ponownie */ }
-    return null;
+    } catch (_) { /* localStorage może być zablokowany */ }
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(consentSessionKey));
+      if (saved && typeof saved === 'object') return { necessary: true, analytics: Boolean(saved.analytics), marketing: Boolean(saved.marketing), updatedAt: saved.updatedAt || null };
+    } catch (_) { /* sessionStorage również może być niedostępny */ }
+    return volatileConsent;
   }
 
   function saveConsent(analytics, marketing) {
     const consent = { necessary: true, analytics: Boolean(analytics), marketing: Boolean(marketing), updatedAt: new Date().toISOString() };
-    try { localStorage.setItem(consentKey, JSON.stringify(consent)); } catch (_) { /* fallback: stan obowiązuje do końca wizyty */ }
+    volatileConsent = consent;
+    try {
+      localStorage.setItem(consentKey, JSON.stringify(consent));
+    } catch (_) {
+      try { sessionStorage.setItem(consentSessionKey, JSON.stringify(consent)); } catch (_) { /* ostateczny fallback pozostaje w pamięci widoku */ }
+    }
     window.dispatchEvent(new CustomEvent('wsr:consent-updated', { detail: consent }));
     closeConsent();
-    renderConsentLauncher();
+    renderConsentState();
   }
 
   function createConsentUI() {
@@ -147,14 +178,13 @@
       </section>
       <div class="cookie-backdrop" data-consent-backdrop></div>
       <section class="cookie-modal" data-consent-modal role="dialog" aria-modal="true" aria-labelledby="settings-title" hidden>
-        <div class="cookie-modal-card"><button class="cookie-modal-close" type="button" data-close-consent aria-label="Zamknij ustawienia">×</button><p class="cookie-kicker">Ustawienia prywatności</p><h2 id="settings-title">Wybierz własne ustawienia.</h2><p class="cookie-modal-intro">Kategorie opcjonalne są wyłączone domyślnie. Zmiana decyzji jest możliwa w każdej chwili przez przycisk przy dolnej krawędzi strony.</p>
+        <div class="cookie-modal-card"><button class="cookie-modal-close" type="button" data-close-consent aria-label="Zamknij ustawienia">×</button><p class="cookie-kicker">Ustawienia prywatności</p><h2 id="settings-title">Wybierz własne ustawienia.</h2><p class="cookie-modal-intro">Kategorie opcjonalne są wyłączone domyślnie. Zmiana decyzji jest możliwa w każdej chwili przez przycisk w stopce strony.</p>
           <div class="consent-choice"><div><strong>Niezbędne</strong><p>Zapewniają bezpieczeństwo i zapamiętują ten wybór.</p></div><span class="consent-always">Zawsze aktywne</span></div>
           <label class="consent-choice consent-toggle"><div><strong>Statystyczne</strong><p>Pomagają zrozumieć, jak odwiedzający korzystają ze strony. Obecnie nieaktywne narzędzie.</p></div><input type="checkbox" data-consent-analytics><span class="toggle-ui" aria-hidden="true"></span></label>
           <label class="consent-choice consent-toggle"><div><strong>Marketingowe</strong><p>Umożliwiają przyszłe mierzenie kampanii lub personalizację reklam. Obecnie nieużywane.</p></div><input type="checkbox" data-consent-marketing><span class="toggle-ui" aria-hidden="true"></span></label>
           <div class="cookie-modal-actions"><button class="cookie-button cookie-button-primary" type="button" data-consent-save>Zapisz wybór</button><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="polityka-cookies.html">Polityka cookies</a></div>
         </div>
-      </section>
-      <button class="cookie-launcher" type="button" data-open-consent>Ustawienia cookies</button>`;
+      </section>`;
     document.body.appendChild(root);
     root.querySelector('[data-consent-accept]').addEventListener('click', () => saveConsent(true, true));
     root.querySelector('[data-consent-reject]').addEventListener('click', () => saveConsent(false, false));
@@ -162,6 +192,7 @@
     root.querySelectorAll('[data-open-consent]').forEach((button) => button.addEventListener('click', openConsent));
     root.querySelector('[data-close-consent]').addEventListener('click', closeConsent);
     root.querySelector('[data-consent-backdrop]').addEventListener('click', closeConsent);
+    root.querySelector('[data-consent-modal]').addEventListener('keydown', trapConsentFocus);
     syncConsentInputs(readConsent());
   }
 
@@ -172,27 +203,48 @@
     root.querySelector('[data-consent-marketing]').checked = Boolean(consent?.marketing);
   }
 
-  function openConsent() {
+  function openConsent(event) {
     const root = document.querySelector('[data-consent-root]');
     if (!root) return;
+    consentReturnFocus = event?.currentTarget || document.activeElement;
     syncConsentInputs(readConsent());
     root.querySelector('[data-consent-banner]').hidden = true;
     root.querySelector('[data-consent-modal]').hidden = false;
     root.querySelector('[data-consent-backdrop]').classList.add('is-visible');
-    root.querySelector('[data-consent-modal] h2').focus?.();
+    document.body.classList.add('consent-open');
+    root.querySelector('[data-close-consent]').focus();
   }
 
-  function closeConsent() {
+  function closeConsent(restoreFocus = true) {
     const root = document.querySelector('[data-consent-root]');
     if (!root) return;
     const modal = root.querySelector('[data-consent-modal]');
     if (modal.hidden) return;
     modal.hidden = true;
     root.querySelector('[data-consent-backdrop]').classList.remove('is-visible');
+    document.body.classList.remove('consent-open');
     if (!readConsent()) root.querySelector('[data-consent-banner]').hidden = false;
+    if (restoreFocus && consentReturnFocus?.isConnected) consentReturnFocus.focus();
+    consentReturnFocus = null;
   }
 
-  function renderConsentLauncher() {
+  function trapConsentFocus(event) {
+    if (event.key !== 'Tab') return;
+    const modal = event.currentTarget;
+    const focusable = [...modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])')].filter((element) => element.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function renderConsentState() {
     const root = document.querySelector('[data-consent-root]');
     if (!root) return;
     const banner = root.querySelector('[data-consent-banner]');
@@ -203,5 +255,5 @@
   document.querySelectorAll('[data-open-consent]').forEach((button) => {
     if (!button.closest('[data-consent-root]')) button.addEventListener('click', openConsent);
   });
-  renderConsentLauncher();
+  renderConsentState();
 })();
