@@ -96,6 +96,14 @@
   if (year) year.textContent = new Date().getFullYear();
 
   document.querySelectorAll('.footer-bottom').forEach((footer) => {
+    const copyright = footer.querySelector('p');
+    if (copyright) {
+      const yearText = year?.textContent || new Date().getFullYear();
+      copyright.textContent = `\u00a9 ${yearText} Warsztat Świadomych Relacji \u2014 Wszystkie prawa zastrze\u017cone`;
+    }
+    footer.querySelectorAll('p').forEach((item) => {
+      if (item !== copyright && /Projekt w fazie|Dokument informacyjny/.test(item.textContent)) item.remove();
+    });
     if (footer.querySelector('a[href="polityka-prywatnosci.html"]')) return;
     const links = document.createElement('span');
     links.className = 'footer-legal-links';
