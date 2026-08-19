@@ -1,24 +1,26 @@
-# webpage_project
+# Warsztat Świadomych Relacji
 
-Profesjonalny, responsywny szkielet statycznej strony firmowej przygotowany do dalszego rozwoju i późniejszej migracji do WordPressa.
+Responsywny prototyp strony WSR — marki Krzysztofa Goljanka poświęconej świadomemu budowaniu, rozwijaniu i dbaniu o relacje.
 
-## Struktura
+## Aktualny zakres
 
-- `index.html` — semantyczna struktura strony i treści startowe
-- `assets/css/styles.css` — responsywny system stylów
-- `assets/js/main.js` — menu mobilne, animacje i drobne interakcje
-- `assets/images/` — favicon i grafika hero
+- landing page z wejściami do terapii i warsztatów,
+- autorski znak typograficzny WSR w HTML/CSS,
+- opis filozofii marki i praktycznego znaczenia „warsztatu”,
+- sekcja twórcy budująca wiarygodność,
+- bezpośrednie przejście do kalendarza ZnanyLekarz,
+- responsywność, dostępność, podstawowe SEO, strona 404 i manifest.
+
+Grafika hero jest tymczasowym assetem koncepcyjnym i ma zostać zastąpiona wybranym zdjęciem Krzysztofa z profesjonalnej sesji.
 
 ## Uruchomienie lokalne
 
-Strona nie wymaga procesu budowania. Otwórz `index.html` bezpośrednio lub uruchom prosty serwer HTTP, np.:
+Projekt nie wymaga procesu budowania:
 
 ```bash
 python -m http.server 8000
 ```
 
-Następnie przejdź do `http://localhost:8000`.
+Następnie otwórz `http://localhost:8000`.
 
-## Kolejny etap
-
-Przed publikacją docelowej wersji należy podmienić nazwę, teksty, dane kontaktowe, metadane SEO i adresy social media. Sekcje są ułożone modułowo, co ułatwi przeniesienie ich do bloków lub szablonów WordPressa.
+Szczegółowe założenia dalszego rozwoju znajdują się w `KIERUNEK-PROJEKTU.md`.
