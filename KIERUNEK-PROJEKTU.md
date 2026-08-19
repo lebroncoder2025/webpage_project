@@ -8,9 +8,11 @@ WSR jest marką poświęconą relacjom rozumianym szeroko: partnerskim, rodzinny
 
 1. Rozpoznanie idei: „Relacje w praktyce. Budujmy je świadomie”.
 2. Szybki wybór między terapią a warsztatami.
-3. Zrozumienie filozofii: kontakt ze sobą i z drugim człowiekiem.
-4. Potwierdzenie wiarygodności przez przedstawienie twórcy WSR.
+3. Przejście do osobnej podstrony terapii indywidualnej, terapii par lub warsztatów.
+4. Zrozumienie filozofii i wiarygodności WSR na podstronie „Poznaj WSR”.
 5. Rezerwacja terapii w ZnanyLekarz albo bezpośredni kontakt w sprawie warsztatów.
+
+Homepage pozostaje krótka: hero, jedna idea, dwa wejścia do oferty, skrócona sekcja twórcy i CTA. Rozbudowane treści nie konkurują ze sobą na jednym ekranie.
 
 ## Kierunek wizualny
 
@@ -18,7 +20,7 @@ WSR jest marką poświęconą relacjom rozumianym szeroko: partnerskim, rodzinny
 - szałwia i głęboka leśna zieleń zamiast nasyconych „medycznych” barw,
 - dużo przestrzeni, spokojna typografia i miękkie rytmy,
 - kursywa służy do podkreślania ludzkiego, refleksyjnego tonu,
-- fotografia w naturze po prawej stronie hero; motto po lewej.
+- fotografia Krzysztofa w naturze po prawej stronie hero; motto po lewej.
 
 ## Migracja do WordPressa
 
@@ -26,7 +28,7 @@ Sekcje należy przenieść jako niezależne bloki: Hero, Idea WSR, Obszary ofert
 
 ## Przed wersją produkcyjną
 
-- podmienić fotografię tymczasową na finalny kadr z sesji,
+- podmienić wersję ze znakiem wodnym na finalny, nieoznaczony kadr z sesji,
 - zatwierdzić slogan i tekst cytatu Krzysztofa,
 - potwierdzić docelowy adres e-mail oraz dane kontaktowe,
 - przygotować podstrony usług i wydarzeń,

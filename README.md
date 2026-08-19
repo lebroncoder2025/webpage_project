@@ -1,17 +1,19 @@
 # Warsztat Świadomych Relacji
 
-Responsywny prototyp strony WSR — marki Krzysztofa Goljanka poświęconej świadomemu budowaniu, rozwijaniu i dbaniu o relacje.
+Responsywna, wielostronicowa strona WSR — marki Krzysztofa Goljanka poświęconej świadomemu budowaniu, rozwijaniu i dbaniu o relacje.
 
 ## Aktualny zakres
 
-- landing page z wejściami do terapii i warsztatów,
+- zwięzła strona główna z wejściami do terapii i warsztatów,
+- osobne podstrony terapii indywidualnej i terapii par,
+- osobne podstrony warsztatów, „Poznaj WSR” i kontaktu,
 - autorski znak typograficzny WSR w HTML/CSS,
 - opis filozofii marki i praktycznego znaczenia „warsztatu”,
 - sekcja twórcy budująca wiarygodność,
 - bezpośrednie przejście do kalendarza ZnanyLekarz,
 - responsywność, dostępność, podstawowe SEO, strona 404 i manifest.
 
-Grafika hero jest tymczasowym assetem koncepcyjnym i ma zostać zastąpiona wybranym zdjęciem Krzysztofa z profesjonalnej sesji.
+Zdjęcie hero pochodzi z przekazanego pliku sesyjnego i zostało zoptymalizowane do WebP. Widoczny watermark jest zachowany; przed publikacją produkcyjną należy podmienić plik na finalny, nieoznaczony kadr.
 
 ## Uruchomienie lokalne
 
