@@ -34,6 +34,13 @@
     document.body.classList.remove('menu-open');
   };
 
+  const resetBookingTransition = () => {
+    transition?.classList.remove('is-active');
+    transition?.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-leaving');
+  };
+  window.addEventListener('pageshow', resetBookingTransition);
+
   menuButton?.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') === 'true';
     menuButton.setAttribute('aria-expanded', String(!open));
@@ -56,7 +63,7 @@
       const bookingTab = window.open('about:blank', '_blank');
       if (bookingTab) bookingTab.opener = null;
       if (reducedMotion || !transition) {
-        if (bookingTab) bookingTab.location.href = destination;
+        if (bookingTab) bookingTab.location.replace(destination);
         return;
       }
       closeMenu();
@@ -66,12 +73,14 @@
       if (transitionCopy) transitionCopy.textContent = 'Otwieramy kalendarz w nowej karcie';
       transition.classList.add('is-active');
       window.setTimeout(() => {
-        if (bookingTab) bookingTab.location.href = destination;
-        transition.classList.remove('is-active');
-        transition.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('is-leaving');
+        if (bookingTab) bookingTab.location.replace(destination);
+        resetBookingTransition();
       }, 650);
     });
+  });
+
+  document.querySelectorAll('.button span, .inline-link span, .contact-text-link span').forEach((arrow) => {
+    if (arrow.textContent.trim() === '\u2197') arrow.textContent = '\u2192';
   });
 
   const revealItems = document.querySelectorAll('.reveal');
