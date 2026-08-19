@@ -37,15 +37,24 @@
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       const destination = link.href;
+      const bookingTab = window.open('about:blank', '_blank');
+      if (bookingTab) bookingTab.opener = null;
       if (reducedMotion || !transition) {
-        window.location.assign(destination);
+        if (bookingTab) bookingTab.location.href = destination;
         return;
       }
       closeMenu();
       document.body.classList.add('is-leaving');
       transition.setAttribute('aria-hidden', 'false');
+      const transitionCopy = transition.querySelector('p');
+      if (transitionCopy) transitionCopy.textContent = 'Otwieramy kalendarz w nowej karcie';
       transition.classList.add('is-active');
-      window.setTimeout(() => window.location.assign(destination), 950);
+      window.setTimeout(() => {
+        if (bookingTab) bookingTab.location.href = destination;
+        transition.classList.remove('is-active');
+        transition.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('is-leaving');
+      }, 650);
     });
   });
 

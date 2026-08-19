@@ -10,7 +10,7 @@ WSR jest marką poświęconą relacjom rozumianym szeroko: partnerskim, rodzinny
 2. Szybki wybór między terapią a warsztatami.
 3. Przejście do osobnej podstrony terapii indywidualnej, terapii par lub warsztatów.
 4. Zrozumienie filozofii i wiarygodności WSR na podstronie „Poznaj WSR”.
-5. Rezerwacja terapii w ZnanyLekarz albo bezpośredni kontakt w sprawie warsztatów.
+5. Rezerwacja terapii w ZnanyLekarz w nowej karcie albo bezpośredni kontakt w sprawie warsztatów.
 
 Homepage pozostaje krótka: hero, jedna idea, dwa wejścia do oferty, skrócona sekcja twórcy i CTA. Rozbudowane treści nie konkurują ze sobą na jednym ekranie.
 

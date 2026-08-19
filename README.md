@@ -8,6 +8,7 @@ Responsywna, wielostronicowa strona WSR — marki Krzysztofa Goljanka poświęco
 - osobne podstrony terapii indywidualnej i terapii par,
 - osobne podstrony warsztatów, „Poznaj WSR” i kontaktu,
 - polityka prywatności, polityka cookies i centrum preferencji zgód z możliwością cofnięcia wyboru,
+- rezerwacja ZnanyLekarz otwierana w nowej karcie, bez pętli powrotu do strony,
 - autorski znak typograficzny WSR w HTML/CSS,
 - opis filozofii marki i praktycznego znaczenia „warsztatu”,
 - sekcja twórcy budująca wiarygodność,
