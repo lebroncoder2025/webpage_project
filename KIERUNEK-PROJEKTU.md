@@ -29,6 +29,8 @@ Sekcje należy przenieść jako niezależne bloki: Hero, Idea WSR, Obszary ofert
 ## Przed wersją produkcyjną
 
 - podmienić wersję ze znakiem wodnym na finalny, nieoznaczony kadr z sesji,
+- uzupełnić pełne dane administratora w Polityce prywatności,
+- potwierdzić, czy finalnie będzie używana analityka, i wpisać konkretnych dostawców do Polityki cookies,
 - zatwierdzić slogan i tekst cytatu Krzysztofa,
 - potwierdzić docelowy adres e-mail oraz dane kontaktowe,
 - przygotować podstrony usług i wydarzeń,
