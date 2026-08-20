@@ -37,6 +37,17 @@
     });
   }
 
+  if (therapyNav) {
+    therapyNav.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'touch') return;
+      therapyNav.open = true;
+    });
+    therapyNav.addEventListener('pointerleave', (event) => {
+      if (event.pointerType === 'touch') return;
+      therapyNav.open = false;
+    });
+  }
+
   const setMenuState = (open) => {
     menuButton?.setAttribute('aria-expanded', String(open));
     menu?.classList.toggle('is-open', open);
