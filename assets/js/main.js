@@ -38,14 +38,26 @@
   }
 
   if (therapyNav) {
+    const therapyMenu = therapyNav.querySelector('.dropdown-menu');
+    let therapyCloseTimer;
+    const cancelTherapyClose = () => window.clearTimeout(therapyCloseTimer);
+    const scheduleTherapyClose = () => {
+      cancelTherapyClose();
+      therapyCloseTimer = window.setTimeout(() => {
+        therapyNav.open = false;
+      }, 360);
+    };
     therapyNav.addEventListener('pointerenter', (event) => {
       if (event.pointerType === 'touch') return;
+      cancelTherapyClose();
       therapyNav.open = true;
     });
     therapyNav.addEventListener('pointerleave', (event) => {
       if (event.pointerType === 'touch') return;
-      therapyNav.open = false;
+      scheduleTherapyClose();
     });
+    therapyMenu?.addEventListener('pointerenter', cancelTherapyClose);
+    therapyMenu?.addEventListener('pointerleave', scheduleTherapyClose);
   }
 
   const setMenuState = (open) => {
