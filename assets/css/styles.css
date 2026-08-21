@@ -111,6 +111,7 @@
 
 /* Feedback v2 — hero, logo and articles */
 .hero-kicker{margin:0;color:var(--forest);font-size:clamp(1.12rem,1.7vw,1.52rem);font-weight:700;letter-spacing:.16em;line-height:1.15;text-transform:uppercase}
+.hero-brandline{margin:0 0 clamp(2.1rem,4vw,3.6rem);color:var(--forest);font:700 clamp(1rem,1.35vw,1.28rem)/1.15 var(--display);letter-spacing:.1em;text-transform:uppercase}
 .hero-rule{display:block;width:min(100%,31rem);height:1px;margin:1.2rem 0 1.45rem;background:var(--forest);transform-origin:left;opacity:.78}
 .hero-title-refined{max-width:780px;margin:0;color:var(--forest);font:400 clamp(3.8rem,6.8vw,7rem)/.96 var(--serif);letter-spacing:-.065em}
 .hero-title-refined em{display:inline;color:var(--forest);font:inherit;letter-spacing:inherit}
@@ -118,6 +119,14 @@
 .hero-home .hero-intro{max-width:500px;margin-top:1.9rem}
 .brand-copy>span{white-space:nowrap}
 .brand-copy i{font-family:"Segoe Print","Bradley Hand","URW Chancery L",cursive;font-style:normal}
+
+/* Production mark follows the selected #11 direction: a clean WSR monogram,
+   vertical divider, one-line name and handwritten signature. */
+.brand-mark{font-family:var(--sans);font-size:2rem;font-weight:800;letter-spacing:-.16em}
+.brand-mark::before,.brand-mark::after{display:none}
+.brand-copy{padding-left:1rem;border-left-color:var(--forest)}
+.brand-copy>span{font-size:.64rem;font-weight:800;letter-spacing:.105em}
+.brand-copy i{margin-top:.32rem;color:var(--sage-ink);font-size:1rem;letter-spacing:-.025em}
 
 .article-list-section{padding-block:clamp(5rem,9vw,8rem)}
 .article-intro{display:grid;grid-template-columns:.65fr 1fr;gap:3rem;align-items:start;margin-bottom:3.5rem}
@@ -140,9 +149,12 @@
 @media(max-width:800px){
   .hero-home{min-height:auto;padding-top:7.5rem;padding-bottom:4.5rem}
   .hero-kicker{font-size:.92rem;letter-spacing:.12em}
+  .hero-brandline{margin-bottom:2rem;font-size:.82rem;letter-spacing:.08em}
   .hero-rule{width:min(100%,19rem);margin-block:1rem 1.2rem}
   .hero-title-refined{font-size:clamp(3.15rem,13vw,5.2rem);letter-spacing:-.07em}
-  .brand-copy>span{white-space:normal}
+  .brand-copy>span{max-width:170px;white-space:normal;font-size:.55rem;letter-spacing:.06em}
+  .brand-mark{font-size:1.8rem}
+  .brand-copy{padding-left:.75rem;border-left-color:var(--sage)}
   .article-intro,.article-grid,.article-note-inner{grid-template-columns:1fr}
   .article-intro{gap:1rem;margin-bottom:2rem}
   .article-grid{gap:1rem}
