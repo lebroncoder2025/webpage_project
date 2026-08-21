@@ -108,3 +108,79 @@
 .offer-card:hover .card-cta::after{transform:scaleX(1)}
 .offer-card:focus-visible .card-cta::after{transform:scaleX(1)}
 .offer-card:focus-visible .card-cta span{transform:translateX(.45rem)}
+
+/* Feedback v2 — hero, logo and articles */
+.hero-kicker{margin:0;color:var(--forest);font-size:clamp(1.12rem,1.7vw,1.52rem);font-weight:700;letter-spacing:.16em;line-height:1.15;text-transform:uppercase}
+.hero-rule{display:block;width:min(100%,31rem);height:1px;margin:1.2rem 0 1.45rem;background:var(--forest);transform-origin:left;opacity:.78}
+.hero-title-refined{max-width:780px;margin:0;color:var(--forest);font:400 clamp(3.8rem,6.8vw,7rem)/.96 var(--serif);letter-spacing:-.065em}
+.hero-title-refined em{display:inline;color:var(--forest);font:inherit;letter-spacing:inherit}
+.hero-home{min-height:790px;padding-top:8.8rem;padding-bottom:5rem}
+.hero-home .hero-intro{max-width:500px;margin-top:1.9rem}
+.brand-copy>span{white-space:nowrap}
+.brand-copy i{font-family:"Segoe Print","Bradley Hand","URW Chancery L",cursive;font-style:normal}
+
+.article-list-section{padding-block:clamp(5rem,9vw,8rem)}
+.article-intro{display:grid;grid-template-columns:.65fr 1fr;gap:3rem;align-items:start;margin-bottom:3.5rem}
+.article-intro .section-lead{max-width:560px;margin:0}
+.article-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+.article-card{display:flex;min-height:330px;flex-direction:column;padding:clamp(1.5rem,3vw,2.25rem);color:var(--forest);background:var(--white);border:1px solid var(--line);transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.article-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(24,49,42,.1);background:var(--mist)}
+.article-card-kicker{margin:0 0 2.3rem;color:var(--sage-ink);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.article-card h2{margin:0 0 1rem;font:500 clamp(1.5rem,2.4vw,2.3rem)/1.03 var(--display);letter-spacing:-.045em}
+.article-card>p:not(.article-card-kicker){margin:0;color:var(--muted);font-size:.86rem;line-height:1.55}
+.article-card-status{margin-top:auto;padding-top:2rem;color:var(--sage-ink);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.article-note{padding-block:clamp(5rem,9vw,8rem);background:var(--mist)}
+.article-note-inner{display:grid;grid-template-columns:.4fr 1.6fr;gap:3rem;align-items:start}
+.article-note h2{max-width:760px;margin:0 0 1rem;font:400 clamp(2.5rem,5vw,5rem)/1 var(--display);letter-spacing:-.06em}
+.article-note h2 em{color:var(--forest)}
+.article-note p:not(.section-index){max-width:560px;color:var(--muted)}
+.article-note .inline-link{margin-top:1rem}
+
+@media(min-width:1061px){.brand-copy>span{font-size:.67rem;letter-spacing:.08em}}
+@media(max-width:800px){
+  .hero-home{min-height:auto;padding-top:7.5rem;padding-bottom:4.5rem}
+  .hero-kicker{font-size:.92rem;letter-spacing:.12em}
+  .hero-rule{width:min(100%,19rem);margin-block:1rem 1.2rem}
+  .hero-title-refined{font-size:clamp(3.15rem,13vw,5.2rem);letter-spacing:-.07em}
+  .brand-copy>span{white-space:normal}
+  .article-intro,.article-grid,.article-note-inner{grid-template-columns:1fr}
+  .article-intro{gap:1rem;margin-bottom:2rem}
+  .article-grid{gap:1rem}
+  .article-card{min-height:285px}
+}
+
+.logo-board-page{background:var(--paper)}
+.logo-board{padding:clamp(8rem,13vw,12rem) 0 6rem}
+.logo-board .page-title{margin-bottom:1.2rem}
+.logo-board .page-lead{max-width:660px;margin-bottom:4rem}
+.logo-proposals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:3rem}
+.logo-proposal{min-height:190px;padding:1.6rem;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);transition:transform .25s ease,box-shadow .25s ease}
+.logo-proposal:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(24,49,42,.1)}
+.logo-proposal-light{background:var(--white)}
+.logo-proposal-sage{background:var(--mist)}
+.logo-proposal-label{margin:0;color:var(--sage-ink);font-size:.62rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.logo-lockup{display:flex;align-items:center;gap:1rem;color:var(--forest)}
+.logo-proposal-mark{position:relative;display:inline-flex;align-items:center;justify-content:center;width:4.7rem;height:3rem;font:800 2.15rem/.8 var(--sans);letter-spacing:-.17em}
+.logo-proposal-mark::before{content:"";position:absolute;right:.1rem;bottom:.1rem;left:.05rem;height:1px;background:var(--sage-ink);transform:scaleX(.74);transform-origin:left}
+.logo-proposal-mark::after{content:"";position:absolute;top:-.15rem;right:-.05rem;width:.4rem;height:.4rem;border:1px solid var(--sage-ink);border-radius:50%}
+.logo-proposal-divider{width:1px;height:2.9rem;background:var(--sage-ink)}
+.logo-proposal-copy{display:grid;gap:.32rem;min-width:0}
+.logo-proposal-copy strong{font-size:.72rem;letter-spacing:.085em;line-height:1.2;text-transform:uppercase;white-space:nowrap}
+.logo-proposal-copy i{color:var(--sage-ink);font:400 1.05rem/1 "Segoe Print","Bradley Hand","URW Chancery L",cursive}
+.logo-lockup-11b .logo-proposal-mark{width:4.2rem;font-size:1.9rem}
+.logo-lockup-11b .logo-proposal-divider{height:2.4rem}
+.logo-lockup-11b .logo-proposal-mark::before{transform:scaleX(1)}
+.logo-lockup-11c .logo-proposal-mark{width:4.4rem;border:1px solid var(--sage-ink);border-right-color:transparent;border-radius:50% 0 0 50%;font-size:1.8rem;letter-spacing:-.2em}
+.logo-lockup-11c .logo-proposal-mark::before{right:.35rem;left:.2rem;transform:scaleX(.5)}
+.logo-lockup-11c .logo-proposal-mark::after{display:none}
+.logo-lockup-12a .logo-proposal-mark{width:4.6rem;height:3.6rem;border:1px solid var(--sage-ink);border-bottom-color:transparent;border-radius:50%;font-size:1.9rem}
+.logo-lockup-12a .logo-proposal-mark::before{bottom:.5rem;left:.45rem;transform:scaleX(.72)}
+.logo-lockup-12a .logo-proposal-mark::after{top:.05rem;right:.22rem}
+.logo-lockup-12b .logo-proposal-mark{width:4.6rem;height:3.6rem;border:1px solid var(--sage-ink);border-radius:50%;font-size:1.9rem}
+.logo-lockup-12b .logo-proposal-mark::before{right:.5rem;bottom:-.15rem;left:.5rem;background:var(--mist);border:1px solid var(--sage-ink);transform:scaleX(.7)}
+.logo-lockup-12b .logo-proposal-mark::after{top:-.3rem;right:.5rem;width:.55rem;height:.55rem;background:var(--mist)}
+.logo-lockup-12c{gap:1.2rem}
+.logo-lockup-12c .logo-proposal-mark{width:3.6rem;height:3.6rem;border:1px solid var(--forest);border-radius:50%;font-size:1.55rem;letter-spacing:-.18em}
+.logo-lockup-12c .logo-proposal-mark::before{right:.72rem;bottom:.4rem;left:.72rem;background:var(--forest);transform:scaleX(1)}
+.logo-lockup-12c .logo-proposal-mark::after{display:none}
+@media(max-width:800px){.logo-board{padding-top:7.5rem}.logo-proposals{grid-template-columns:1fr;gap:.85rem}.logo-proposal{min-height:170px;padding:1.35rem}.logo-proposal-copy strong{white-space:normal;font-size:.66rem}.logo-lockup{gap:.75rem}.logo-proposal-mark{flex:0 0 4rem}.logo-proposal-divider{height:2.5rem}}
