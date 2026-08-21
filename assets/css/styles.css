@@ -219,3 +219,17 @@
   body.menu-open .brand{filter:brightness(0) invert(1)}
   body.menu-open .footer-brand{filter:brightness(0) invert(1)}
 }
+
+/* Hero proportions copied from the supplied reference: the upper line is the
+   dominant statement, the lower line is deliberately smaller and lighter. */
+.hero-brandline{margin-bottom:2rem;font-size:clamp(.85rem,1vw,1rem)}
+.hero-kicker{max-width:690px;font-size:clamp(2.25rem,3.4vw,3.8rem);font-weight:700;letter-spacing:.075em;line-height:1.04}
+.hero-rule{width:min(100%,690px);margin:.95rem 0 1.05rem}
+.hero .hero-title-refined{max-width:690px;font-size:clamp(1.9rem,2.7vw,3rem);font-weight:300;line-height:1.05;letter-spacing:-.045em}
+.hero .hero-title-refined em{font:inherit;letter-spacing:inherit}
+@media(max-width:800px){
+  .hero-brandline{margin-bottom:1.8rem;font-size:.8rem}
+  .hero-kicker{font-size:clamp(1.5rem,7.5vw,2rem);letter-spacing:.045em}
+  .hero-rule{width:100%;margin:.8rem 0 .9rem}
+  .hero .hero-title-refined{font-size:clamp(1.35rem,6vw,1.75rem);letter-spacing:-.035em}
+}
