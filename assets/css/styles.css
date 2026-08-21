@@ -233,3 +233,14 @@
   .hero-rule{width:100%;margin:.8rem 0 .9rem}
   .hero .hero-title-refined{font-size:clamp(1.35rem,6vw,1.75rem);letter-spacing:-.035em}
 }
+
+/* Larger, readable social controls. */
+.social-links{gap:.5rem}
+.social-links a{width:2.25rem;min-width:2.25rem;height:2.25rem;min-height:2.25rem;font-size:.8rem;border-width:1.5px}
+.social-links a[aria-label="Instagram"]{font-size:1rem}
+.social-links a[aria-label="LinkedIn"]{font-size:.7rem}
+@media(max-width:1060px){
+  .main-nav .social-links-menu a{width:2.65rem;min-width:2.65rem;height:2.65rem;min-height:2.65rem;font-size:.92rem}
+  .main-nav .social-links-menu a[aria-label="Instagram"]{font-size:1.15rem}
+  .main-nav .social-links-menu a[aria-label="LinkedIn"]{font-size:.8rem}
+}
