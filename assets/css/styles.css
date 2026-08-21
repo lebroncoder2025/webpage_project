@@ -196,3 +196,26 @@
 .logo-lockup-12c .logo-proposal-mark::before{right:.72rem;bottom:.4rem;left:.72rem;background:var(--forest);transform:scaleX(1)}
 .logo-lockup-12c .logo-proposal-mark::after{display:none}
 @media(max-width:800px){.logo-board{padding-top:7.5rem}.logo-proposals{grid-template-columns:1fr;gap:.85rem}.logo-proposal{min-height:170px;padding:1.35rem}.logo-proposal-copy strong{white-space:normal;font-size:.66rem}.logo-lockup{gap:.75rem}.logo-proposal-mark{flex:0 0 4rem}.logo-proposal-divider{height:2.5rem}}
+
+/* Final logo lock-up and stable header geometry. */
+.brand{display:block;width:clamp(270px,24vw,332px);min-height:56px;background:url("../images/logo-wsr.svg") left center/contain no-repeat;flex:0 0 clamp(270px,24vw,332px)}
+.brand-mark,.brand-copy{display:none!important}
+.footer-brand{filter:brightness(0) invert(1)}
+.header-inner{display:grid;grid-template-columns:clamp(270px,24vw,332px) minmax(0,1fr) auto;gap:clamp(1rem,2vw,2rem)}
+.main-nav{justify-content:flex-end;min-width:0;gap:clamp(.65rem,1.25vw,1.15rem);white-space:nowrap}
+.social-links-header{justify-self:end}
+.hero-title-refined{font-family:var(--sans);font-weight:300;letter-spacing:-.07em}
+.hero-title-refined em{font-family:inherit;font-weight:inherit}
+@media(max-width:1220px) and (min-width:1061px){
+  .brand{width:248px;flex-basis:248px}
+  .header-inner{grid-template-columns:248px minmax(0,1fr);gap:1.1rem}
+  .main-nav{gap:.62rem;font-size:.68rem}
+  .social-links-header{display:none}
+}
+@media(max-width:1060px){
+  .header-inner{display:flex;gap:1rem}
+  .brand{width:min(68vw,225px);min-height:46px;flex:0 1 min(68vw,225px)}
+  .footer-brand{width:min(100%,310px);min-height:54px}
+  body.menu-open .brand{filter:brightness(0) invert(1)}
+  body.menu-open .footer-brand{filter:brightness(0) invert(1)}
+}
